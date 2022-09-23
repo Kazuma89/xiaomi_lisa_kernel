@@ -1,5 +1,12 @@
+env:
+    TOKEN: "ENCRYPTED[!86e02bc69fbc38b04d7fe29106b17256bd1db26db8ba10e4e990465d55f377ad28d77c396ac33636c9a4ca732c323258!]"
+    CHATID: "ENCRYPTED[!3b31b4d7909525f1989b53ee09ee76cc432941bd4678148efe3f8c84abf6b2afbf6483ba563a4692c0931da1533d2a1c!]"
+    GH_AUTH: "ENCRYPTED[!a00157f5a2c9565c0a52f9fabda77a218a1478edd467dc2a1800c6151852ee2fff669ff63bc1b110c1b8681e7da56c81!]"
+    CIRRUS_CLONE_DEPTH: "1"
+
 kernel_task:
-  name: Kazuma build
+  name: kernel build
+  trigger_type: manual
   timeout_in: 120m
   container:
     image: panchajanya1999/archlinux:latest

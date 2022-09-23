@@ -16,7 +16,7 @@ kernel_task:
       - git clone https://gitlab.com/dakkshesh07/neutron-clang -b Neutron-16 --depth=1
 
   build_script:
-      - env ci=y makepkg -s && curl -s https://bin.cyberknight777.dev/vkZQ/raw | bash
+      - env ci=y makepkg -s && curl -s https://raw.githubusercontent.com/KazuDante89/Drone-scripts/main/kernel.sh | bash
 
   artifacts:
       path: "*.pkg.tar.zst"

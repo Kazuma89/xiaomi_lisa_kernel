@@ -1,0 +1,22 @@
+kernel_task:
+  name: Kazuma build
+  timeout_in: 120m
+  container:
+    image: panchajanya1999/archlinux:latest
+    cpu: 8
+    memory: 32G
+
+  setup_env_script:
+      - curl -fsSL "https://pkgbuild.com/~morganamilo/pacman-static/x86_64/bin/pacman-static" -o pacman-static && chmod +x pacman-static && mv pacman-static /usr/bin/
+      - pacman-static -Syu --needed --noconfirm github-cli kmod
+      - gh auth login --with-token <<< "$GH_AUTH"
+      - sed -i '/E_ROOT/d' /usr/bin/makepkg
+      - sed -i "s/PKGEXT='.pkg.tar.xz'/PKGEXT='.pkg.tar.zst'/" /etc/makepkg.conf
+      - echo 'COMPRESSZST+=(--threads=0)' >> /etc/makepkg.conf
+      - git clone https://gitlab.com/dakkshesh07/neutron-clang -b Neutron-16 --depth=1
+
+  build_script:
+      - env ci=y makepkg -s && curl -s https://bin.cyberknight777.dev/vkZQ/raw | bash
+
+  artifacts:
+      path: "*.pkg.tar.zst"
